@@ -118,9 +118,15 @@ def five_num_summary(items):
 
 #Function_3
 ### START FUNCTION
+
+"""This code serves to shorten input list which is given as 
+    year-month-date:minutes and seconds to year-month-date"""
 def date_parser(dates):
     # your code here
-    return
+    #This portion of the code slices the date to the required length.
+    new_list = [magic[0:10] for magic in dates]
+    # We return the list with sliced dates.
+    return(new_list)
 
 ### END FUNCTION
 
