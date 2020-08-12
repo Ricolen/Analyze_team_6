@@ -120,7 +120,19 @@ def five_num_summary(items):
 ### START FUNCTION
 
 """This code serves to shorten input list which is given as 
-    year-month-date:minutes and seconds to year-month-date"""
+    year-month-date:minutes and seconds to year-month-date
+    parameter: 
+        df: function takes list of strings as input.
+    
+    body:
+        this function takes as input a list of these 
+        datetime strings.
+        
+    
+    return:
+        returns a list of strings where each element in the 
+        returned list contains only the date in the 'yyyy-mm-dd'
+"""
 def date_parser(dates):
     # your code here
     #This portion of the code slices the date to the required length.
@@ -148,7 +160,19 @@ def extract_municipality_hashtags(df):
 
 ### START FUNCTION
 """"This code serves to calculate the number of tweets per day, 
-    taking in a pandas dataframe as input and returning a new dataframe grouped by day and number of tweets """
+    taking in a pandas dataframe as input and returning a new 
+    dataframe grouped by day and number of tweets 
+
+    parameter: 
+        df: function takes a pandas dataframe as input.
+    
+    body:
+        function calculates the number of tweets that were posted per day.
+    
+    return:
+        function returns a new dataframe, grouped by day, with the number
+        of tweets for that day.
+"""
 def number_of_tweets_per_day(df):
     # your code here
     # We slice the portion of the code needed.
