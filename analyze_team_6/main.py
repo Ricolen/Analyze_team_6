@@ -118,9 +118,27 @@ def five_num_summary(items):
 
 #Function_3
 ### START FUNCTION
+
+"""This code serves to shorten input list which is given as 
+    year-month-date:minutes and seconds to year-month-date
+    parameter: 
+        df: function takes list of strings as input.
+    
+    body:
+        this function takes as input a list of these 
+        datetime strings.
+        
+    
+    return:
+        returns a list of strings where each element in the 
+        returned list contains only the date in the 'yyyy-mm-dd'
+"""
 def date_parser(dates):
     # your code here
-    return
+    #This portion of the code slices the date to the required length.
+    new_list = [magic[0:10] for magic in dates]
+    # We return the list with sliced dates.
+    return(new_list)
 
 ### END FUNCTION
 
@@ -141,9 +159,29 @@ def extract_municipality_hashtags(df):
 #Function_5
 
 ### START FUNCTION
+""""This code serves to calculate the number of tweets per day, 
+    taking in a pandas dataframe as input and returning a new 
+    dataframe grouped by day and number of tweets 
+
+    parameter: 
+        df: function takes a pandas dataframe as input.
+    
+    body:
+        function calculates the number of tweets that were posted per day.
+    
+    return:
+        function returns a new dataframe, grouped by day, with the number
+        of tweets for that day..
+"""
 def number_of_tweets_per_day(df):
     # your code here
-    return
+    # We slice the portion of the code needed.
+    df['Date'] = [date[0:10] for date in df['Date']]
+    # Drop the duplicated column.
+    new_df = df.drop(columns=['Date'],axis=1)
+    # Group the contents of the column by the sliced date.
+    new_df = new_df.groupby(df['Date']).count() 
+    return new_df
 
 ### END FUNCTION
 
