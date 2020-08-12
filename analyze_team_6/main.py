@@ -110,8 +110,15 @@ def dictionary_of_metrics(items):
 #Function_2
 ### START FUNCTION
 def five_num_summary(items):
-    # your code here
-    return
+    """
+    The function should take a list as input.
+    The function should return a dict with keys 'max', 'median', 'min', 'q1', and 'q3' corresponding to the maximum, median, minimum, first quartile and third quartile, respectively. You may use numpy functions to aid in your calculations.
+    All numerical values should be rounded to two decimal places.
+    """
+    five_num_sum = np.percentile(items,[0, 25, 50, 75, 100])
+    dict = {'min': five_num_sum[0],'Q1':five_num_sum[1],'Median':five_num_sum[2],'Q3':five_num_sum[3],'Max':five_num_sum[4]}
+    
+    return dict
 
 ### END FUNCTION
 
