@@ -171,7 +171,7 @@ def extract_municipality_hashtags(df):
     
     return:
         function returns a new dataframe, grouped by day, with the number
-        of tweets for that day.
+        of tweets for that day..
 """
 def number_of_tweets_per_day(df):
     # your code here
