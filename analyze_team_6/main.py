@@ -80,13 +80,13 @@ def dictionary_of_metrics(items):
     """A function that calculates the dictionary of metrics including mean,
     median, standard deviation, variance, minimum value, and a maximum value from a list
 
-    parameter: 
+    Parameter: 
         df: takes a list of float numbers as an input
     
-    body:
+    Body:
         calculate the summary statistics (metrics) including mean, median, standard deviation, variance, maximum and minimum using numpy
     
-    return:
+    Return:
         dictionary of metrics
     """
     
@@ -110,55 +110,17 @@ def dictionary_of_metrics(items):
 #Function_2
 ### START FUNCTION
 def five_num_summary(items):
-    """
-    The function takes a list as input.
-    The function return a dict with keys 'max', 'median', 'min', 'q1', and 'q3'
-    corresponding to the maximum, median, minimum, first quartile and third quartile, respectively.
-    All numerical values should be rounded to two decimal places.
-
-    parameter: 
-        df: The function takes a list as input
-    
-    body:
-        
-         The function return a dict with keys 'max', 'median', 'min', 'q1', and 'q3'
-        corresponding to the maximum, median, minimum, first quartile and third quartile, respectively. You may use numpy functions to aid in your calculations.
-    
-    return:
-        five number summary
-    """
-    
-    five_num_sum = np.percentile(items,[0, 25, 50, 75, 100])
-    dict = {'max': five_num_sum[4],'Median':five_num_sum[2],'Min':five_num_sum[0],'Q1':five_num_sum[1],'Q3':five_num_sum[3]}
-    
-    return dict
+    # your code here
+    return
 
 ### END FUNCTION
 
 
 #Function_3
 ### START FUNCTION
-
-"""This code serves to shorten input list which is given as 
-    year-month-date:minutes and seconds to year-month-date
-    parameter: 
-        df: function takes list of strings as input.
-    
-    body:
-        this function takes as input a list of these 
-        datetime strings.
-        
-    
-    return:
-        returns a list of strings where each element in the 
-        returned list contains only the date in the 'yyyy-mm-dd'
-"""
 def date_parser(dates):
     # your code here
-    #This portion of the code slices the date to the required length.
-    new_list = [magic[0:10] for magic in dates]
-    # We return the list with sliced dates.
-    return(new_list)
+    return
 
 ### END FUNCTION
 
@@ -168,9 +130,46 @@ def date_parser(dates):
 
 ### START FUNCTION
 def extract_municipality_hashtags(df):
-    # your code here
+    """ Function which takes in a pandas dataframe and returns a modified dataframe that includes 
+    two new columns that contain information about the municipality and hashtag of the tweet 
+
+    Param
+        Pandas dataframe df
+
+    Body
+        Modifies the dataFrame to extract the municipality and hashtags. Assigns null value to missing data.
     
-    return 
+    Return:
+        Modified dataframe with Municipality and Hashtags column
+    """
+    
+    hashtags = []
+    municipality = []
+
+    tweets = [i.split(" ") for i in df['Tweets']]
+
+    new_munic_list = []
+    new_tag_list = []
+
+    for tweet in tweets:
+        municipality.append([mun_dict[word] for word in tweet if word in list(mun_dict.keys())])
+        hashtags.append([tag.lower() for tag in tweet if tag.startswith('#')])
+
+    for item in municipality:
+        if item == []:
+            item = np.nan  
+        new_munic_list.append(item)
+
+    for tag in hashtags:
+        if tag == []:
+            tag = np.nan
+        new_tag_list.append(tag)
+    
+    df['municipality'] = new_munic_list
+    df['hashtags'] = new_tag_list
+  
+    return df
+     
 
 ### END FUNCTION
 
@@ -179,29 +178,9 @@ def extract_municipality_hashtags(df):
 #Function_5
 
 ### START FUNCTION
-""""This code serves to calculate the number of tweets per day, 
-    taking in a pandas dataframe as input and returning a new 
-    dataframe grouped by day and number of tweets 
-
-    parameter: 
-        df: function takes a pandas dataframe as input.
-    
-    body:
-        function calculates the number of tweets that were posted per day.
-    
-    return:
-        function returns a new dataframe, grouped by day, with the number
-        of tweets for that day..
-"""
 def number_of_tweets_per_day(df):
     # your code here
-    # We slice the portion of the code needed.
-    df['Date'] = [date[0:10] for date in df['Date']]
-    # Drop the duplicated column.
-    new_df = df.drop(columns=['Date'],axis=1)
-    # Group the contents of the column by the sliced date.
-    new_df = new_df.groupby(df['Date']).count() 
-    return new_df
+    return
 
 ### END FUNCTION
 
@@ -212,16 +191,16 @@ def number_of_tweets_per_day(df):
 ### START FUNCTION
 def word_splitter(df):
     # your code here
-    """function that splits the sentences ina dataframe into a list
-    of the separate words and returns a modified dataFrame
-
-    parameter: 
+    """eter: 
         df: expected parameter is a pandas dataframe
     
-    body:
+    body:  function that splits the sentences ina dataframe into a list
+    of the separate words and returns a modified dataFrame
+
+    Param
         modifies the dataFrame into split words and assigns them to splits tweet
     
-    return:
+    Return:
         modified dataframe with a new column of split tweets
     """
     new_df = pd.DataFrame(df) # creating a new dataframe from the old dataframe
@@ -238,8 +217,21 @@ def word_splitter(df):
 #Function_7
 ### START FUNCTION
 def stop_words_remover(df):
-    # your code here
-    return
+   """Function that splits the sentences ina dataframe into a list
+    of the separate words and removes all stop words 
+
+     Param
+        Pandas dataframe df
+        
+    Body
+        Modifies the dataFrame into split words and removes the stop words from the tweet
+    
+    Return:
+        Modified dataframe of split tweets without stop words
+    """
+    df['Without Stop Words'] = df['Tweets'].apply(lambda x: [item for item in str(x).lower().split() if item not in stop_words_dict['stopwords']])
+
+    return df
 
 ### END FUNCTION
 
